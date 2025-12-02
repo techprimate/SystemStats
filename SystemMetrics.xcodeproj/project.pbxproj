@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D45C02FF2EDEDDEF00975137 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = D45C02FE2EDEDDEF00975137 /* SFSafeSymbols */; };
-		D4A800EF2EDF47FF00266B67 /* SentrySPM in Frameworks */ = {isa = PBXBuildFile; productRef = D4A800EE2EDF47FF00266B67 /* SentrySPM */; };
+		D4A801102EDF5C7000266B67 /* SentrySPM in Frameworks */ = {isa = PBXBuildFile; productRef = D4A8010F2EDF5C7000266B67 /* SentrySPM */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4A800EF2EDF47FF00266B67 /* SentrySPM in Frameworks */,
+				D4A801102EDF5C7000266B67 /* SentrySPM in Frameworks */,
 				D45C02FF2EDEDDEF00975137 /* SFSafeSymbols in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,7 +81,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				D4A800F12EDF480700266B67 /* PBXTargetDependency */,
+				D4A801122EDF5C7A00266B67 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				D45C02F12EDEDC6600975137 /* Source */,
@@ -90,7 +90,7 @@
 			name = SystemMetrics;
 			packageProductDependencies = (
 				D45C02FE2EDEDDEF00975137 /* SFSafeSymbols */,
-				D4A800EE2EDF47FF00266B67 /* SentrySPM */,
+				D4A8010F2EDF5C7000266B67 /* SentrySPM */,
 			);
 			productName = SystemMetrics;
 			productReference = D45C02EF2EDEDC6600975137 /* SystemMetrics.app */;
@@ -122,7 +122,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D45C02FD2EDEDDEF00975137 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				D46B05402EDF3E9E00AF4A0A /* XCLocalSwiftPackageReference "../../getsentry/sentry-cocoa-metrics-4" */,
+				D4A800F22EDF5C4400266B67 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D45C02F02EDEDC6600975137 /* Products */;
@@ -173,9 +173,9 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D4A800F12EDF480700266B67 /* PBXTargetDependency */ = {
+		D4A801122EDF5C7A00266B67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = D4A800F02EDF480700266B67 /* SentrySPM */;
+			productRef = D4A801112EDF5C7A00266B67 /* SentrySPM */;
 		};
 /* End PBXTargetDependency section */
 
@@ -421,13 +421,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		D46B05402EDF3E9E00AF4A0A /* XCLocalSwiftPackageReference "../../getsentry/sentry-cocoa-metrics-4" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../getsentry/sentry-cocoa-metrics-4";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		D45C02FD2EDEDDEF00975137 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -435,6 +428,14 @@
 			requirement = {
 				kind = exactVersion;
 				version = 6.2.0;
+			};
+		};
+		D4A800F22EDF5C4400266B67 /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
+			requirement = {
+				branch = "philprime/metrics-public-api";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -445,14 +446,14 @@
 			package = D45C02FD2EDEDDEF00975137 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
 			productName = SFSafeSymbols;
 		};
-		D4A800EE2EDF47FF00266B67 /* SentrySPM */ = {
+		D4A8010F2EDF5C7000266B67 /* SentrySPM */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D46B05402EDF3E9E00AF4A0A /* XCLocalSwiftPackageReference "../../getsentry/sentry-cocoa-metrics-4" */;
+			package = D4A800F22EDF5C4400266B67 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = SentrySPM;
 		};
-		D4A800F02EDF480700266B67 /* SentrySPM */ = {
+		D4A801112EDF5C7A00266B67 /* SentrySPM */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D46B05402EDF3E9E00AF4A0A /* XCLocalSwiftPackageReference "../../getsentry/sentry-cocoa-metrics-4" */;
+			package = D4A800F22EDF5C4400266B67 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
 			productName = SentrySPM;
 		};
 /* End XCSwiftPackageProductDependency section */

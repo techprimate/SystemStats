@@ -1,6 +1,15 @@
 {
-  "originHash" : "7975b4984a05a361f87c8352bf147d53e327c5392fa2b5e01e7f4ff03b5dc4c8",
+  "originHash" : "f087e4ec2870e16c29718cf2fbefb6c34ddea673ef532ba13d92e0ca3e473c94",
   "pins" : [
+    {
+      "identity" : "sentry-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/getsentry/sentry-cocoa",
+      "state" : {
+        "branch" : "philprime/metrics-public-api",
+        "revision" : "781a115da0e5148cf50fd8988fc9245eec850dbd"
+      }
+    },
     {
       "identity" : "sfsafesymbols",
       "kind" : "remoteSourceControl",
