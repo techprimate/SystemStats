@@ -4,6 +4,8 @@ import SwiftUI
 
 @main
 struct MainApp: App {
+    @AppStorage(AppStorageKeys.Settings.customDeviceName) private var customDeviceName = ""
+
     private let metricsCollector = SystemMetricsCollector(collectionInterval: 1.0)
 
     init() {
@@ -65,7 +67,7 @@ struct MainApp: App {
         }
 
         // Start collecting metrics when the app launches
-        metricsCollector.start()
+        metricsCollector.start(hostname: customDeviceName.isEmpty ? nil : customDeviceName)
 
         SentrySDK.logger.info("App initialized")
     }

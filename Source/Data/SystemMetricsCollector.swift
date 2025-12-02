@@ -13,12 +13,20 @@ class SystemMetricsCollector {
     }
 
     /// Start collecting metrics at regular intervals
-    func start() {
+    func start(hostname: String?) {
         // Initialize CPU collector (sets up initial state for delta calculation)
         cpuCollector.initialize()
 
-        // Collect immediately on start
-        collectAndPrint()
+        // Configure the SentrySDK scope
+        SentrySDK.configureScope { scope in
+            // Set the hostname so we can filter metrics by machine
+            //
+            // If a custom name was chosen, use it, otherwise fallback to the hostname
+            // We add a unique id to disambiguate in case multiple machines have the same name
+            let id = "\(hostname ?? Host.current().name ?? "unknown")-\(UUID().uuidString)"
+            scope.setAttribute(value: id, key: "machine.id")
+            SentrySDK.logger.info("Configured scope with hostname: \(id)")
+        }
 
         // Set up timer for periodic collection
         timer = Timer.scheduledTimer(withTimeInterval: collectionInterval, repeats: true) { [weak self] _ in
@@ -27,6 +35,9 @@ class SystemMetricsCollector {
 
         // Add timer to run loop so it works in menu bar app context
         RunLoop.current.add(timer!, forMode: .common)
+
+        // Fire the timer once on start
+        timer?.fire()
     }
 
     /// Stop collecting metrics
