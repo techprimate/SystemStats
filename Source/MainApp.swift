@@ -3,6 +3,13 @@ import SwiftUI
 
 @main
 struct MainApp: App {
+    private let metricsCollector = SystemMetricsCollector(collectionInterval: 1.0)
+
+    init() {
+        // Start collecting metrics when the app launches
+        metricsCollector.start()
+    }
+
     var body: some Scene {
         // Create the menu bar item for the application
         MenuBarExtra(
