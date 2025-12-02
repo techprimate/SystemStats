@@ -1,4 +1,5 @@
 import Foundation
+import SentrySwift
 
 /// Orchestrates CPU and RAM metrics collection and prints them to stdout
 class SystemMetricsCollector {
@@ -49,6 +50,7 @@ class SystemMetricsCollector {
             cpuUsageString += "            Core \(index): \(String(format: "%.2f", usage))%\n"
         }
 
+        // Print stats to the debug console
         print(
             """
             [\(timestamp)] System Metrics:
@@ -62,5 +64,59 @@ class SystemMetricsCollector {
                 Cached Files: \(String(format: "%.2f", memoryInfo.cachedFiles / 1024 / 1024 / 1024)) GB
                 Swap Used: \(String(format: "%.2f", memoryInfo.swapUsed / 1024 / 1024 / 1024)) GB
             """)
+
+        sendCPUMetricsToSentry(cpuInfo)
+        sendMemoryMetricsToSentry(memoryInfo)
+    }
+
+    fileprivate func sendCPUMetricsToSentry(_ cpuInfo: CPUInfo) {
+        // Send CPU metrics to Sentry
+        SentrySDK.metrics.gauge(key: "system.cpu.average", value: cpuInfo.averageUsage)
+        for (index, usage) in cpuInfo.perCoreUsage.enumerated() {
+            SentrySDK.metrics.gauge(
+                key: "system.cpu.core-\(index)", value: usage,
+                attributes: [
+                    "unit": "percent"
+                ])
+        }
+    }
+
+    fileprivate func sendMemoryMetricsToSentry(_ memoryInfo: MemoryInfo) {
+        // Send memory metrics to Sentry
+        SentrySDK.metrics.gauge(
+            key: "system.memory.physical", value: memoryInfo.physicalMemory,
+            attributes: [
+                "unit": "byte"
+            ])
+        SentrySDK.metrics.gauge(
+            key: "system.memory.used", value: memoryInfo.memoryUsed,
+            attributes: [
+                "unit": "byte"
+            ])
+        SentrySDK.metrics.gauge(
+            key: "system.memory.used.app", value: memoryInfo.appMemory,
+            attributes: [
+                "unit": "byte"
+            ])
+        SentrySDK.metrics.gauge(
+            key: "system.memory.used.wired", value: memoryInfo.wiredMemory,
+            attributes: [
+                "unit": "byte"
+            ])
+        SentrySDK.metrics.gauge(
+            key: "system.memory.used.compressed", value: memoryInfo.compressedMemory,
+            attributes: [
+                "unit": "byte"
+            ])
+        SentrySDK.metrics.gauge(
+            key: "system.memory.used.cached-files", value: memoryInfo.cachedFiles,
+            attributes: [
+                "unit": "byte"
+            ])
+        SentrySDK.metrics.gauge(
+            key: "system.memory.used.swap", value: memoryInfo.swapUsed,
+            attributes: [
+                "unit": "byte"
+            ])
     }
 }
